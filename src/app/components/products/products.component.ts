@@ -16,6 +16,8 @@ export class ProductsComponent implements OnInit {
   total = 0;
   products: Product[] = [];
   shownProductDetail: boolean = false;
+  limit = 10;
+  offset = 0;
   productChosen: Product = {
     id: '',
     price: 0,
@@ -26,7 +28,9 @@ export class ProductsComponent implements OnInit {
       name: ''
     },
     description: ''
-  }
+  };
+ 
+
 
   constructor(
     private storeService: StoreService,
@@ -36,9 +40,10 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productsService.getAllProducts()
+    this.productsService.getProductByPage(10,0)
     .subscribe(data => {
       this.products = data;
+      this.offset += this.limit;
     });
   }
 
@@ -77,7 +82,7 @@ export class ProductsComponent implements OnInit {
 
   updateProduct() {
     const changes = {
-      title: 'nuevo titulo',
+      title: 'nuevo x',
 
     }
     const id = this.productChosen.id;
@@ -86,6 +91,27 @@ export class ProductsComponent implements OnInit {
         const productIndex = this.products.findIndex(item => item.id === this.productChosen.id)
        // const chosenId = this.productChosen.findIndex(i => i.id )
         this.products[productIndex] = data;
+        this.productChosen = data;
+       // this.shownProductDetail = false;
+      })
+  }
+
+  deleteProduct() {
+    const id = this.productChosen.id;
+    this.productsService.delete(id)
+      .subscribe(data => {
+        const productIndex = this.products.findIndex(item => item.id === this.productChosen.id)
+        this.products.splice(productIndex, 1);
+        this.shownProductDetail = false;
+      })
+  }
+
+  loadMore() {
+    this.productsService.getProductByPage(this.limit, this.offset)
+      .subscribe(data => {
+       this.products =  this.products.concat(data);
+        this.offset += this.limit;
+
       })
   }
 
