@@ -37,7 +37,7 @@ export class NavComponent implements OnInit {
     //   console.log(this.token);
     //   this.getProfile();
     // });
-    this.AuthService.loginAndGet('sebas@mail.com', '1212')
+    this.AuthService.loginAndGet('maria@mail.com', '12345')
     .subscribe(user => {
       this.profile = user.email;
       this.token = '---';
@@ -45,7 +45,7 @@ export class NavComponent implements OnInit {
   }
 
   getProfile() {
-    this.AuthService.profile(this.token)
+    this.AuthService.profile()
     .subscribe(user => {
       //this.profile = user;
     });
