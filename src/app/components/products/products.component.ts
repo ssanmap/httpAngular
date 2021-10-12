@@ -42,8 +42,10 @@ export class ProductsComponent  {
 
 
   onAddToShoppingCart(product: Product) {
+    
     this.storeService.addProduct(product);
     this.total = this.storeService.getTotal();
+    console.log('agregando' + this.total);
   }
 
   togleProductDetail() {
