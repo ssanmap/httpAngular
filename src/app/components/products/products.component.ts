@@ -45,7 +45,7 @@ export class ProductsComponent  {
     
     this.storeService.addProduct(product);
     this.total = this.storeService.getTotal();
-    console.log('agregando' + this.total);
+   // console.log('agregando' + this.total);
   }
 
   togleProductDetail() {
