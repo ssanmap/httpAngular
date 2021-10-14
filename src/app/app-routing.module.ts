@@ -1,22 +1,35 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { CategoryComponent } from './pages/category/category.component';
-import { MyCartComponent } from './pages/my-cart/my-cart.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import { QuicklinkStrategy } from 'ngx-quicklink';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { CustomPreloadService } from './services/custom-preload.service';
+
+
+
+
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'category/:id', component: CategoryComponent },
-  { path: 'my-cart', component: MyCartComponent },
-  {path: 'product/:id', component:ProductDetailComponent},
+    
+  {
+    path: '',
+    loadChildren: () => import('./website/website.module').then(m => m.WebsiteModule),
+    data: {
+      preload: true,
+    }
+  },
+  
+  {
+    path: 'cms',
+    loadChildren: () => import('./cms/cms.module').then(m => m.CmsModule)
+  },
   { path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: QuicklinkStrategy
+      //CustomPreloadService
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

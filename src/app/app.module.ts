@@ -6,51 +6,27 @@ import { SwiperModule } from 'swiper/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ImgComponent } from './components/img/img.component';
-import { ProductComponent } from './components/product/product.component';
-import { ProductsComponent } from './components/products/products.component';
-import { NavComponent } from './components/nav/nav.component';
-import { ReversePipe } from './pipes/reverse.pipe';
-import { TimeAgoPipe } from './pipes/time-ago.pipe';
-import { HighlightDirective } from './directives/highlight.directive';
+
 import { TimeInterceptor } from './interceptors/time.interceptor';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { HomeComponent } from './pages/home/home.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { RecoveryComponent } from './pages/recovery/recovery.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { LoginComponent } from './pages/login/login.component';
-import { MyCartComponent } from './pages/my-cart/my-cart.component';
-import { CategoryComponent } from './pages/category/category.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { QuicklinkModule } from 'ngx-quicklink';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ImgComponent,
-    ProductComponent,
-    ProductsComponent,
-    NavComponent,
-    ReversePipe,
-    TimeAgoPipe,
-    HighlightDirective,
-    HomeComponent,
-    RegisterComponent,
-    RecoveryComponent,
-    ProfileComponent,
-    LoginComponent,
-    MyCartComponent,
-    CategoryComponent,
-    NotFoundComponent,
-    ProductDetailComponent
+    NotFoundComponent
+ 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    SwiperModule
+    SwiperModule,
+    QuicklinkModule
+    
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi:true},
