@@ -30,7 +30,10 @@ export class AppComponent {
   }
 
   createUser() {
-    this.UsersService.create({ name: 'Sebas', email: 'sebas@mail.com', password: '1212' })
+    this.UsersService.create({
+      name: 'Sebas', email: 'sebas@mail.com', password: '1212',
+      role: 'customer'
+      })
     .subscribe(res => {
       console.log(res)
     })

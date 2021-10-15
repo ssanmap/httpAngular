@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { TokenService } from './token.service';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class AuthService {
       )
   }
   profile() {
-    return this.http.get(`${environment.apiUrl}/api/auth/profile`, {
+    return this.http.get<User>(`${environment.apiUrl}/api/auth/profile`, {
      // headers: {
      //   Authorization: `Bearer ${token}`,
     //  }
@@ -33,5 +34,9 @@ export class AuthService {
     .pipe(
       switchMap(() => this.profile()),
     )
+  }
+
+  logOut() {
+    localStorage.clear();
   }
 }
