@@ -47,10 +47,11 @@ export class NavComponent implements OnInit {
     //   console.log(this.token);
     //   this.getProfile();
     // });
-    this.AuthService.loginAndGet('maria@mail.com', '12345')
+    this.AuthService.loginAndGet('admin@mail.com', 'admin123')
     .subscribe(user => {
       this.profile = user.email;
       this.token = '---';
+      this.router.navigate(['/profile'])
     });
   }
 

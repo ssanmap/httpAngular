@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanDeactivate } from '@angular/router';
 
 
 import { HomeComponent } from './pages/home/home.component';
@@ -8,6 +8,8 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { LayoutComponent } from './components/layout/layout.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { RegisterComponent } from './pages/register/register.component';
+import { ExitGuard } from '../guards/exit.guard';
 
 
 const routes: Routes = [
@@ -27,6 +29,7 @@ const routes: Routes = [
      
       { path: 'my-cart', component: MyCartComponent },
       { path: 'profile', component: ProfileComponent , canActivate: [AuthGuard]},
+      { path: 'register', component: RegisterComponent , canDeactivate: [ExitGuard]},
       { path: 'product/:id', component: ProductDetailComponent }
     ]
   
